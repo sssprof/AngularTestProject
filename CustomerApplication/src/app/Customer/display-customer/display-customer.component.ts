@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { CustomerService } from '../services/customer.service';
 import { customer } from '../models/customer.model';
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-customer',
@@ -13,8 +14,10 @@ export class DisplayCustomerComponent implements OnInit {
   customerService: CustomerService;
   private customerSubscription!: Subscription;
   allCustomerData!: customer[];
+  routerService!: Router;
   constructor(private injectService: Injector) {
     this.customerService = injectService.get<CustomerService>(CustomerService);
+    this.routerService = injectService.get<Router>(Router);
   }
 
 
@@ -53,6 +56,10 @@ export class DisplayCustomerComponent implements OnInit {
         })
       }
     })
+  }
+
+  onBtnNewCustomerClick(){
+    this.routerService.navigate(["add-edit"]);
   }
 
   ngOnDestroy() {
