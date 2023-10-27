@@ -21,5 +21,9 @@ export class CustomerService {
     return this.httpClient.post("https://getinvoices.azurewebsites.net/api/Customer", customerObj);
   }
 
+  getCustomerDataById(id:number){
+    return this.httpClient.get("https://getinvoices.azurewebsites.net/api/Customer/"+id);
+  }
+
 
 }

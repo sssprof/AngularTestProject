@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { CustomerService } from '../services/customer.service';
 import { customer } from '../models/customer.model';
 import Swal from 'sweetalert2'
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-customer',
@@ -56,6 +56,13 @@ export class DisplayCustomerComponent implements OnInit {
         })
       }
     })
+  }
+
+  onBtnEditClick(id:number){
+    const navigationExtras: NavigationExtras = {
+      queryParams : {cusotmerId : id}
+    };
+    this.routerService.navigate(["add-edit"], navigationExtras);  
   }
 
   onBtnNewCustomerClick(){
