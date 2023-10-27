@@ -24,7 +24,7 @@
                 <td>{{item.phone_Number}}</td>
                 <td>{{item.country_code}}</td>
                 <td>{{item.gender | uppercase  }}</td>
-                <td>{{item.balance}}</td>
+                <td>{{item.balance | currency}}</td>
                 <td><button class="btn btn-primary" (click)="onBtnEditClick(item.id)">Edit</button></td>
                 <td><button class="btn btn-primary" (click)="onBtnDeleteClick(item.id,i)">Delete</button></td>
             </tr>

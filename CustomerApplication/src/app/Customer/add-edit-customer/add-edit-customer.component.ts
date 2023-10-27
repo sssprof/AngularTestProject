@@ -15,8 +15,9 @@ export class AddEditCustomerComponent implements OnInit {
   customerService !: CustomerService;
   routerService!: Router;
   activateRouterService!: ActivatedRoute;
-  customerData!:customer;
-  isNewRecord:boolean = false;
+  customerData!: customer;
+  isUpdateRecord: boolean = false;
+  customerId!: number;
 
   constructor(private injectorService: Injector) {
     this.formBuilderService = injectorService.get<FormBuilder>(FormBuilder);
@@ -40,24 +41,24 @@ export class AddEditCustomerComponent implements OnInit {
 
   getCustomerId() {
     this.activateRouterService.queryParams.subscribe(params => {
-      let cusotmerId = params["cusotmerId"];
-      this.customerService.getCustomerDataById(cusotmerId).subscribe((res:any) => {
-          if(res){
-            this.isNewRecord = false;
-            this.customerData = res;
-              this.customerForm.patchValue({
-                firstName: this.customerData.firstname,
-                lastName: this.customerData.lastname,
-                email: this.customerData.email,
-                phoneNumber: this.customerData.phone_Number,
-                countryCode: this.customerData.country_code,
-                gender: this.customerData.gender,
-                balance:this.customerData.balance                           
-              })
-          }
-          else{
-            this.isNewRecord = true;
-          }
+      this.customerId = params["cusotmerId"];
+      this.customerService.getCustomerDataById(this.customerId).subscribe((res: any) => {
+        if (res) {
+          this.isUpdateRecord = true;
+          this.customerData = res;
+          this.customerForm.patchValue({
+            firstName: this.customerData.firstname,
+            lastName: this.customerData.lastname,
+            email: this.customerData.email,
+            phoneNumber: this.customerData.phone_Number,
+            countryCode: this.customerData.country_code,
+            gender: this.customerData.gender,
+            balance: this.customerData.balance
+          })
+        }
+        else {
+          this.isUpdateRecord = false;
+        }
       }, (error) => {
         console.log(error)
       })
@@ -75,17 +76,32 @@ export class AddEditCustomerComponent implements OnInit {
       balance: +this.customerForm.get('balance')?.value
     }
 
+    if (this.isUpdateRecord) {
+      this.updateCustomerData(customerObj);
+    }
+    else {
+      this.createNewCustomerData(customerObj);
+    }
+
+  }
+
+  createNewCustomerData(customerObj: any) {
     this.customerService.addNewCustomer(customerObj).subscribe((res) => {
       this.routerService.navigate([""]);
     }, (error) => {
       console.log(error);
     })
+  }
 
+  updateCustomerData(customerObj: any) {
+    this.customerService.updateCustomerData(this.customerId, customerObj).subscribe((res) => {
+      this.routerService.navigate([""]);
+    }, (error) => {
+      console.log(error);
+    })
   }
 
   onBtnClearClick() {
     this.customerForm.reset();
   }
-
-
 }

@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <div class="col-md-6 mx-auto">
-        <h2> {{ isNewRecord ? "Add Customer" : "Edit Customer"}}</h2>
+        <h2> {{ isUpdateRecord ? "Edit Customer" : "Add Customer"}}</h2>
         <form [formGroup]="customerForm">
             <div class="form-body">
                 <div class="form-group">
@@ -13,8 +13,10 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" formControlName="email"> 
-                    <span class="validate-email" *ngIf="customerForm.get('email')?.touched && !customerForm.get('email')?.valid"> This field is required</span>
+                    <input type="email" class="form-control" id="email" formControlName="email">
+                    <span class="validate-email"
+                        *ngIf="customerForm.get('email')?.touched && !customerForm.get('email')?.valid"> This field is
+                        required</span>
                 </div>
                 <div class="form-group mt-3">
                     <label for="phoneNumber">Phone Number</label>
@@ -27,8 +29,8 @@
                 <div class="form-group mt-3">
                     <label for="firstName">Gender</label>
                     <div class="form-control">
-                        <input type="radio" name="gender" value="Male" formControlName="gender">  Male
-                        <input type="radio" name="gender" value="Female" formControlName="gender">  Female
+                        <input type="radio" name="gender" value="Male" formControlName="gender"> Male
+                        <input type="radio" name="gender" value="Female" formControlName="gender"> Female
                     </div>
                 </div>
                 <div class="form-group mt-3">
@@ -36,7 +38,8 @@
                     <input type="text" class="form-control" id="firstName" formControlName="balance">
                 </div>
                 <div class="mt-3">
-                    <button class="btn btn-primary" [disabled]="!customerForm.valid" (click)="onBtnSubmitClick()">Submit</button> 
+                    <button class="btn btn-primary" [disabled]="!customerForm.valid" (click)="onBtnSubmitClick()"> {{
+                        isUpdateRecord ? 'Update' : 'Submit' }} </button>
                     <button class="btn btn-primary margin-20" (click)="onBtnClearClick()">Clear</button>
                 </div>
             </div>
