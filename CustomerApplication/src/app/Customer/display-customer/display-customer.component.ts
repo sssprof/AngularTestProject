@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CustomerService } from '../services/customer.service';
 import { customer } from '../models/customer.model';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-display-customer',
@@ -18,18 +19,44 @@ export class DisplayCustomerComponent implements OnInit {
 
 
   ngOnInit() {
-    this.customerSubscription = this.customerService.getAllCustomerRecords().subscribe((res:any) => {
-        if(res){
-          this.allCustomerData =res;
-          console.log(this.allCustomerData);
-        }
+    this.customerSubscription = this.customerService.getAllCustomerRecords().subscribe((res: any) => {
+      if (res) {
+        this.allCustomerData = res;
+        console.log(this.allCustomerData);
+      }
     }, (error: any) => {
-        console.log(error);
+      console.log(error);
     })
   }
 
-  ngOnDestroy(){
-    if(this.customerSubscription){
+  onBtnDeleteClick(id: number, index: number) {
+    console.log(index);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        this.customerService.deleteCustomerById(id).subscribe((res) => {
+          this.allCustomerData.splice(index, 1);
+          Swal.fire(
+            'Deleted!',
+            'Row has been deleted.',
+            'success'
+          )
+        }, (error) => {
+          console.log(error);
+        })
+      }
+    })
+  }
+
+  ngOnDestroy() {
+    if (this.customerSubscription) {
       this.customerSubscription.unsubscribe();
     }
   }

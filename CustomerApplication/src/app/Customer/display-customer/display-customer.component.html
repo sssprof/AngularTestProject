@@ -1,5 +1,5 @@
-<div class="container">
-    <table>
+<div class="container mt-5">
+    <table class="table table-condensed table-bordered">
         <thead>
             <tr>
                 <th>Customer ID</th>
@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of allCustomerData">
+            <tr *ngFor="let item of allCustomerData; let i=index">
                 <td>{{item.id}}</td>
                 <td>{{item.firstname}}</td>
                 <td>{{item.lastname}}</td>
@@ -22,8 +22,8 @@
                 <td>{{item.country_code}}</td>
                 <td>{{item.gender | uppercase  }}</td>
                 <td>{{item.balance}}</td>
-                <td><button>Edit</button></td>
-                <td><button>Delete</button></td>
+                <td><button class="btn btn-primary">Edit</button></td>
+                <td><button class="btn btn-primary" (click)="onBtnDeleteClick(item.id,i)">Delete</button></td>
             </tr>
         </tbody>
     </table>
