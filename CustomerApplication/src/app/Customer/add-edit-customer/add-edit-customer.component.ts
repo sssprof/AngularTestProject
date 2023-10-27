@@ -16,6 +16,7 @@ export class AddEditCustomerComponent implements OnInit {
   routerService!: Router;
   activateRouterService!: ActivatedRoute;
   customerData!:customer;
+  isNewRecord:boolean = false;
 
   constructor(private injectorService: Injector) {
     this.formBuilderService = injectorService.get<FormBuilder>(FormBuilder);
@@ -28,13 +29,12 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerForm = this.formBuilderService.group({
       firstName: [""],
       lastName: [""],
-      email: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
       phoneNumber: [""],
       countryCode: [""],
       gender: [""],
       balance: [""]
     })
-
     this.getCustomerId();
   }
 
@@ -43,8 +43,8 @@ export class AddEditCustomerComponent implements OnInit {
       let cusotmerId = params["cusotmerId"];
       this.customerService.getCustomerDataById(cusotmerId).subscribe((res:any) => {
           if(res){
-              console.log(res);
-              this.customerData = res;
+            this.isNewRecord = false;
+            this.customerData = res;
               this.customerForm.patchValue({
                 firstName: this.customerData.firstname,
                 lastName: this.customerData.lastname,
@@ -54,6 +54,9 @@ export class AddEditCustomerComponent implements OnInit {
                 gender: this.customerData.gender,
                 balance:this.customerData.balance                           
               })
+          }
+          else{
+            this.isNewRecord = true;
           }
       }, (error) => {
         console.log(error)
