@@ -18,15 +18,15 @@ export class CustomerService {
   }
 
   addNewCustomer(customerObj: any) {
-    return this.httpClient.post("https://getinvoices.azurewebsites.net/api/Customer", customerObj);
+    return this.httpClient.post("http://localhost:5076/api/Customer/AddCustomer", customerObj);
   }
 
-  getCustomerDataById(id:number){
-    return this.httpClient.get("http://localhost:5076/api/Customer/CustomerById/"+id);
+  getCustomerDataById(id: number) {
+    return this.httpClient.get("http://localhost:5076/api/Customer/CustomerById/" + id);
   }
 
-  updateCustomerData(id:number, customerObj:any){
-    return this.httpClient.post("https://getinvoices.azurewebsites.net/api/Customer/"+id, customerObj);
+  updateCustomerData(id: number, customerObj: any) {
+    return this.httpClient.post("http://localhost:5076/api/Customer/UpdateCustomer/" + id, customerObj);
   }
 
 

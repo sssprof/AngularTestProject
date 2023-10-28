@@ -7,6 +7,11 @@ namespace CustomerWebApi.Managers
         {
             _customerRepository = customerRepository;
         }
+
+        public int AddNewCustomer(CustomerModel customer)
+        {
+            return _customerRepository.AddNewCustomer(customer);
+        }
         public List<CustomerEntity> GetAllCustomerData()
         {
             return _customerRepository.GetAllCustomerData();
@@ -21,6 +26,5 @@ namespace CustomerWebApi.Managers
         {
             return _customerRepository.DeleteCustomerDataById(Id);
         }
-
     }
 }
