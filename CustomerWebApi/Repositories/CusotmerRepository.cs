@@ -10,12 +10,21 @@ namespace CustomerWebApi
         {
             _dapperContext = dapperContext;
         }
-        public List<CustomerEntity>  GetAllCustomerData()
+        public List<CustomerEntity> GetAllCustomerData()
         {
             var query = "SELECT * FROM CustomerInfo";
             using (var connection = _dapperContext.CreateConnection())
             {
                 return connection.Query<CustomerEntity>(query).ToList();
+            }
+        }
+
+        public CustomerEntity GetCustomerDataById(int Id)
+        {
+            var query = "SELECT * FROM CustomerInfo WHERE Id = "+Id;
+            using (var connection = _dapperContext.CreateConnection())
+            {
+                return connection.Query<CustomerEntity>(query).FirstOrDefault();
             }
         }
     }

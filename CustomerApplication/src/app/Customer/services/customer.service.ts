@@ -22,7 +22,7 @@ export class CustomerService {
   }
 
   getCustomerDataById(id:number){
-    return this.httpClient.get("https://getinvoices.azurewebsites.net/api/Customer/"+id);
+    return this.httpClient.get("http://localhost:5076/api/Customer/CustomerById/"+id);
   }
 
   updateCustomerData(id:number, customerObj:any){

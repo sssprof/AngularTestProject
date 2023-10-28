@@ -19,5 +19,11 @@ namespace CustomerWebApi.Controllers
            return Ok(_customerManager.GetAllCustomerData());
         }
 
+        [HttpGet("CustomerById/{id}")]
+        public ActionResult<CustomerModel> GetCustomerDataById(int id)
+        {
+           return Ok(_customerManager.GetCustomerDataById(id));
+        }
+
     }
 }

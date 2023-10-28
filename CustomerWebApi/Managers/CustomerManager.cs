@@ -11,5 +11,11 @@ namespace CustomerWebApi.Managers
         {
             return _customerRepository.GetAllCustomerData();
         }
+
+        public CustomerEntity GetCustomerDataById(int Id)
+        {
+            return _customerRepository.GetCustomerDataById(Id);
+        }
+
     }
 }
