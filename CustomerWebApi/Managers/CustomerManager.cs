@@ -8,6 +8,7 @@ namespace CustomerWebApi.Managers
             _customerRepository = customerRepository;
         }
 
+        #region Customer related functionality
         public int AddNewCustomer(CustomerModel customer)
         {
             return _customerRepository.AddNewCustomer(customer);
@@ -26,5 +27,6 @@ namespace CustomerWebApi.Managers
         {
             return _customerRepository.DeleteCustomerDataById(Id);
         }
+        #endregion
     }
 }
