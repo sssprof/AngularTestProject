@@ -25,5 +25,11 @@ namespace CustomerWebApi.Controllers
            return Ok(_customerManager.GetCustomerDataById(id));
         }
 
+        [HttpDelete("DeleteCustomer/{id}")]
+        public ActionResult<int> DeleteCustomerDataById(int id)
+        {
+           return Ok(_customerManager.DeleteCustomerDataById(id));
+        }
+
     }
 }

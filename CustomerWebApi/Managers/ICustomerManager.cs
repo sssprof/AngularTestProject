@@ -5,5 +5,7 @@ namespace CustomerWebApi.Managers
         List<CustomerEntity> GetAllCustomerData();
 
         CustomerEntity GetCustomerDataById(int Id);
+        int DeleteCustomerDataById(int Id);
+
     }
 }

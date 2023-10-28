@@ -27,5 +27,14 @@ namespace CustomerWebApi
                 return connection.Query<CustomerEntity>(query).FirstOrDefault();
             }
         }
+
+        public int DeleteCustomerDataById(int Id)
+        {
+            var query = "DELETE FROM CustomerInfo WHERE Id = "+Id;
+            using (var connection = _dapperContext.CreateConnection())
+            {
+                return connection.Query<int>(query).FirstOrDefault();
+            }
+        }
     }
 }

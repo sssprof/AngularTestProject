@@ -14,7 +14,7 @@ export class CustomerService {
   }
 
   deleteCustomerById(id: number) {
-    return this.httpClient.delete("https://getinvoices.azurewebsites.net/api/Customer/" + id);
+    return this.httpClient.delete("http://localhost:5076/api/Customer/DeleteCustomer/" + id);
   }
 
   addNewCustomer(customerObj: any) {

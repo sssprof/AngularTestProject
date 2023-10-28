@@ -17,5 +17,10 @@ namespace CustomerWebApi.Managers
             return _customerRepository.GetCustomerDataById(Id);
         }
 
+        public int DeleteCustomerDataById(int Id)
+        {
+            return _customerRepository.DeleteCustomerDataById(Id);
+        }
+
     }
 }
