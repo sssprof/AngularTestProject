@@ -18,8 +18,15 @@ builder.Services.AddCors(options =>
     });
 builder.Services.AddScoped<ICustomerManager, CustomerManager>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-builder.Services.AddSingleton<DapperContext>(); 
-
+builder.Services.AddSingleton<DapperContext>();
+builder.Services.AddLogging(builder =>
+    {
+        builder.AddConsole();
+    });
+builder.Services.AddControllers(options =>
+    {
+        options.Filters.Add<LoggingFilter>();
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,7 +38,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-            
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
