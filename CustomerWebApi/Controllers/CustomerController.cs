@@ -17,11 +17,18 @@ namespace CustomerWebApi.Controllers
       [HttpPost("AddCustomer")]
       public ActionResult<int> AddNewCustomer(CustomerModel customer)
       {
-         return Ok(_customerManager.AddNewCustomer(customer));
+         if (customer == null)
+         {
+            return BadRequest();
+         }
+         else
+         {
+            return Ok(_customerManager.AddNewCustomer(customer));
+         }
       }
 
       [HttpGet("Customers")]
-      public ActionResult<List<CustomerModel>> GetName()
+      public ActionResult<List<CustomerModel>> GetAllCustomerData()
       {
          return Ok(_customerManager.GetAllCustomerData());
       }
@@ -29,13 +36,27 @@ namespace CustomerWebApi.Controllers
       [HttpGet("CustomerById/{id}")]
       public ActionResult<CustomerModel> GetCustomerDataById(int id)
       {
-         return Ok(_customerManager.GetCustomerDataById(id));
+         if (id > 0)
+         {
+            return Ok(_customerManager.GetCustomerDataById(id));
+         }
+         else
+         {
+            return BadRequest();
+         }
       }
 
       [HttpDelete("DeleteCustomer/{id}")]
       public ActionResult<int> DeleteCustomerDataById(int id)
       {
-         return Ok(_customerManager.DeleteCustomerDataById(id));
+         if (id > 0)
+         {
+            return Ok(_customerManager.DeleteCustomerDataById(id));
+         }
+         else
+         {
+            return BadRequest();
+         }
       }
 
    }
