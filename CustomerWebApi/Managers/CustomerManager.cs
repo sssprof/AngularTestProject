@@ -7,9 +7,9 @@ namespace CustomerWebApi.Managers
         {
             _customerRepository = customerRepository;
         }
-        public string GetCustomerName()
+        public List<CustomerEntity> GetAllCustomerData()
         {
-            return _customerRepository.GetCustomerName();
+            return _customerRepository.GetAllCustomerData();
         }
     }
 }

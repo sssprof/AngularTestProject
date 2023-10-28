@@ -13,10 +13,10 @@ namespace CustomerWebApi.Controllers
                 _customerManager = customerManager;
         }
 
-        [HttpGet()]
-        public string GetName()
+        [HttpGet("Customers")]
+        public ActionResult<List<CustomerModel>> GetName()
         {
-           return _customerManager.GetCustomerName();
+           return Ok(_customerManager.GetAllCustomerData());
         }
 
     }

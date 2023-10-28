@@ -10,7 +10,7 @@ export class CustomerService {
   constructor(private httpClient: HttpClient) { }
 
   getAllCustomerRecords() {
-    return this.httpClient.get<customer>("https://getinvoices.azurewebsites.net/api/Customers");
+    return this.httpClient.get<customer>("http://localhost:5076/api/Customer/Customers");
   }
 
   deleteCustomerById(id: number) {

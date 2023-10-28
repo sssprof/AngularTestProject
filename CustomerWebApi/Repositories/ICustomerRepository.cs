@@ -2,7 +2,7 @@ namespace CustomerWebApi
 {
     public interface ICustomerRepository
     {
-        public string GetCustomerName();
+        public List<CustomerEntity> GetAllCustomerData();
     }
 
 }

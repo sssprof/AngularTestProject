@@ -47,11 +47,11 @@ export class AddEditCustomerComponent implements OnInit {
           this.isUpdateRecord = true;
           this.customerData = res;
           this.customerForm.patchValue({
-            firstName: this.customerData.firstname,
-            lastName: this.customerData.lastname,
+            firstName: this.customerData.firstName,
+            lastName: this.customerData.lastName,
             email: this.customerData.email,
-            phoneNumber: this.customerData.phone_Number,
-            countryCode: this.customerData.country_code,
+            phoneNumber: this.customerData.phoneNumber,
+            countryCode: this.customerData.countryCode,
             gender: this.customerData.gender,
             balance: this.customerData.balance
           })

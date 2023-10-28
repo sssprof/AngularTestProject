@@ -2,6 +2,6 @@ namespace CustomerWebApi.Managers
 {
     public interface ICustomerManager
     {
-        string GetCustomerName();
+        List<CustomerEntity> GetAllCustomerData();
     }
 }
