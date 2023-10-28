@@ -1,5 +1,6 @@
 using CustomerWebApi;
 using CustomerWebApi.Managers;
+using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,8 +28,14 @@ builder.Services.AddControllers(options =>
     {
         options.Filters.Add<LoggingFilter>();
     });
-var app = builder.Build();
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true; // Enable compression for HTTPS requests.
+    options.Providers.Add<GzipCompressionProvider>();
+});
 
+var app = builder.Build();
+app.UseResponseCompression();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
